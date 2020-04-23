@@ -10,8 +10,6 @@ import pyautogui as pag
 
 def loginAPKT():
     #Login APKT
-    driver.find_element_by_xpath("//button[@class='hamburger showMT']").click()
-    driver.implicitly_wait(5)
     driver.find_element_by_xpath("//nav[@class='header-nav']/ul/li[5]").click()
     driver.implicitly_wait(5)
 
@@ -27,8 +25,6 @@ def loginAPKT():
     driver.implicitly_wait(5)
 
 def logoutAPKT():
-    driver.find_element_by_xpath("//button[@class='hamburger showMT']").click()
-    driver.implicitly_wait(5)
     time.sleep(2)
     driver.find_element_by_xpath("//nav[@class='header-nav']/ul/li[5]").click()
     driver.implicitly_wait(5)
@@ -48,12 +44,14 @@ def answerQ():
         driver.implicitly_wait(5)
         time.sleep(1)
         pag.scroll(-100)
-        driver.find_element_by_xpath("//button[@class='btn_nextchallenge btn_darkblue btn_radius']").click()
-        driver.implicitly_wait(5)
-        time.sleep(2)
 
         if i == 4:
-            driver.find_element_by_xpath("//button[@class='hamburger showMT']").click()
+            driver.find_element_by_xpath("//div[@class='lb-close-btn']").click()
+        else:
+            driver.find_element_by_xpath("//button[@class='btn_nextchallenge btn_darkblue btn_radius']").click()
+
+        driver.implicitly_wait(5)
+        time.sleep(2)
 
 def MouseMoveTo(xPos, yPos):
     pag.moveTo(xPos, yPos, duration = 0.5)
@@ -64,7 +62,8 @@ AKT_url = "https://www.discoverychannel.com.tw/animalkentei/index.php"
 driver.get(AKT_url)
 driver.implicitly_wait(5)
 #Adjust Window Size
-driver.set_window_size(1000, 1000)
+driver.maximize_window()
+driver.find_element_by_xpath("//div[@class='lb-close-btn']").click()
 driver.implicitly_wait(5)
 
 #-------Login & Start------
