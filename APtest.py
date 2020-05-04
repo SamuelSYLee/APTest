@@ -33,7 +33,7 @@ def answerQ():
     for i in range(5):
         print('Answer question', i + 1)
         time.sleep(1)
-        filename = os.path.dirname(__file__) + '/akt' + str(i) + '.png'
+        filename = os.path.dirname(__file__) + '/akt' + str(i + 1) + '.png'
         driver.get_screenshot_as_file(filename)
         driver.implicitly_wait(5)
         driver.find_element_by_xpath("//div[@class='item'][1]").click()
@@ -48,7 +48,12 @@ def answerQ():
         if i == 4:
             driver.find_element_by_xpath("//div[@class='lb-close-btn']").click()
         else:
-            driver.find_element_by_xpath("//button[@class='btn_nextchallenge btn_darkblue btn_radius']").click()
+            try:
+                driver.find_element_by_xpath("//button[@class='btn_nextchallenge btn_darkblue btn_radius']").click()
+            except:
+                MouseMoveTo(499, 659)
+                print(pag.position())
+                pag.click()
 
         driver.implicitly_wait(5)
         time.sleep(2)
