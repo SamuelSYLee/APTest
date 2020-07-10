@@ -45,7 +45,7 @@ def answerQ():
             try:
                 driver.find_element_by_xpath("//button[@class='btn_nextchallenge btn_darkblue btn_radius']").click()
             except:
-                MouseMoveTo(499, 659)
+                MouseMoveTo(580, 710)
                 print(pag.position())
                 pag.click()
 
@@ -54,36 +54,38 @@ def answerQ():
 def MouseMoveTo(xPos, yPos):
     pag.moveTo(xPos, yPos, duration = 0.5)
 
-#Connect AKT Website
-driver = webdriver.Chrome()
-driver.implicitly_wait(5)
-AKT_url = "https://www.discoverychannel.com.tw/animalkentei/index.php"
-driver.get(AKT_url)
-#Adjust Window Size
-driver.maximize_window()
-try: 
-    driver.find_element_by_xpath("//div[@class='lb-close-btn']").click()
-except:
+
+if __name__ == "__main__":
+    #Connect AKT Website
+    driver = webdriver.Chrome()
+    driver.implicitly_wait(5)
+    AKT_url = "https://www.discoverychannel.com.tw/animalkentei/index.php"
+    driver.get(AKT_url)
+    #Adjust Window Size
+    driver.maximize_window()
+    try: 
+        driver.find_element_by_xpath("//div[@class='lb-close-btn']").click()
+    except:
+        time.sleep(1)
+
+    #-------Login & Start------
+    loginAPKT()
     time.sleep(1)
+    MouseMoveTo(450, 350)
+    pag.scroll(-10)
+    time.sleep(1)
+    filename = os.path.dirname(__file__) + '/ACCOUNT.png'
+    driver.get_screenshot_as_file(filename)
+    driver.find_element_by_xpath("//button[@class='btn_goplay btn_darkblue btn_radius gaBtn']").click()
+    driver.find_element_by_xpath("//a[@class='btn btn_play']").click()
 
-#-------Login & Start------
-loginAPKT()
-time.sleep(1)
-MouseMoveTo(450, 350)
-pag.scroll(-10)
-time.sleep(1)
-filename = os.path.dirname(__file__) + '/ACCOUNT.png'
-driver.get_screenshot_as_file(filename)
-driver.find_element_by_xpath("//button[@class='btn_goplay btn_darkblue btn_radius gaBtn']").click()
-driver.find_element_by_xpath("//a[@class='btn btn_play']").click()
+    try:
+        print("Alert:", driver.switch_to.alert.text)
+        driver.switch_to.alert.accept()
+    except:
+        answerQ()
 
-try:
-    print("Alert:", driver.switch_to.alert.text)
-    driver.switch_to.alert.accept()
-except:
-    answerQ()
-
-logoutAPKT()
-time.sleep(3)
-print('Test Result: PASS')
-driver.quit()
+    logoutAPKT()
+    time.sleep(3)
+    print('Test Result: PASS')
+    driver.quit()
