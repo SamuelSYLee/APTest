@@ -61,7 +61,10 @@ AKT_url = "https://www.discoverychannel.com.tw/animalkentei/index.php"
 driver.get(AKT_url)
 #Adjust Window Size
 driver.maximize_window()
-driver.find_element_by_xpath("//div[@class='lb-close-btn']").click()
+try: 
+    driver.find_element_by_xpath("//div[@class='lb-close-btn']").click()
+except:
+    time.sleep(1)
 
 #-------Login & Start------
 loginAPKT()
