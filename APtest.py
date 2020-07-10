@@ -14,11 +14,11 @@ def loginAPKT():
 
     AccountName = driver.find_element_by_xpath("//div[1]/input[@class='input-field w50']")
     AccountName.clear()
-    AccountName.send_keys("ACCOUNT")
+    AccountName.send_keys("Please type in your ACCOUNT")
 
     AccountPW = driver.find_element_by_xpath("//div[2]/input[@class='input-field w50']")
     AccountPW.clear()
-    AccountPW.send_keys("PASSWORD")
+    AccountPW.send_keys("Please type in your PASSWORD")
 
     driver.find_element_by_xpath("//button[@class='btn_signin btn_blue btn_radius']").click()
 
